@@ -24,12 +24,14 @@ const Home = () => {
             </div>
           </div>
           <p className='mt-6 md:mt-4 leading-6 text-[18px] max-w-[370px]'>I am an electrical engineering student at Georgia Tech exploring robotics and chip design. From a custom R2-D2 and wireless controller to a RISC-V processor core, I build hardware through embedded systems, digital logic, and hands-on engineering.</p>
-          <div>
-            <a href="#projects">
-              <div className='flex justify-center align-middle rounded-sm bg-[var(--primary)] w-[150px] h-[42px] my-4 px-2 py-2 drop-shadow-custom  hover:scale-[120%] transition-transform duration-300 ease-in-out'>
-                <p className='text-[var(--light)] text-xl text-center mr-4'>Projects</p>
-                <img src={Arrow} alt='Forward Arrow' className='w-[30px] h-[20px] mt-1'/>
-              </div>
+          <div className="flex flex-wrap gap-3 my-4">
+            <a href="#projects" className="flex items-center justify-center gap-3 rounded-sm bg-[var(--primary)] text-[var(--light)] h-[42px] px-3 drop-shadow-custom hover:scale-105 transition-transform duration-300">
+              <span className="text-xl">Projects</span>
+              <img src={Arrow} alt="" className="w-[30px] h-[20px]"/>
+            </a>
+            <a href={process.env.PUBLIC_URL + '/resume/Joel-Biswas-Resume.pdf'} download="Joel-Biswas-Resume.pdf" className="flex items-center justify-center gap-2 rounded-sm border-2 border-[var(--primary)] text-[var(--primary)] h-[42px] px-3 drop-shadow-custom hover:scale-105 transition-transform duration-300">
+              <span className="text-xl">Download Résumé</span>
+              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg>
             </a>
           </div>
         </div>
