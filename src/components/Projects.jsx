@@ -16,11 +16,11 @@ const projects = [
   'An ESP32 runs the embedded control, while an LCD interface allows adjustment of respiratory rate and compression volume through PWM motor control.',
   'The project combines mechanical CAD, fabrication, electronics, and C++ firmware in a budget-focused engineering prototype.'
  ],links:[['Ventilator repository','https://github.com/JoelBiswas/DIYVentilator']]},
- {id:'risc-v-core',name:'32-bit RISC-V Core',tags:['Chip Design','SystemVerilog','RTL'],technologies:['SystemVerilog','RISC-V','Xcelium'],description:'A 32-bit processor core written in SystemVerilog through Georgia Tech’s SiliconJackets onboarding. Implements a subset of RISC-V instructions, connecting instruction decode, an ALU, a register file, and memory interfaces.',details:[
+ {id:'risc-v-core',images:[{"file": "risc-v-gallery-1.png", "alt": "RISC-V core physical layout", "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/CPUAfterHSOptimizations.PNG"}],name:'32-bit RISC-V Core',tags:['Chip Design','SystemVerilog','RTL'],technologies:['SystemVerilog','RISC-V','Xcelium'],description:'A 32-bit processor core written in SystemVerilog through Georgia Tech’s SiliconJackets onboarding. Implements a subset of RISC-V instructions, connecting instruction decode, an ALU, a register file, and memory interfaces.',details:[
   'Designed the processor RTL in SystemVerilog, including instruction decoding, the register file, arithmetic and logic operations, program-counter control, and memory interfaces.',
   'The core supports a subset of RISC-V functionality spanning arithmetic, shifts, loads, stores, and branches. Design work also explores stalls, memory handshakes, and control timing.',
-  'Developed as part of SiliconJackets, Georgia Tech’s student chip-design organization. The RTL design phase is complete, with verification work in progress using SystemVerilog testbenches and Cadence Xcelium. Physical design is a later onboarding stage.'
- ],links:[]}
+  'Developed as part of SiliconJackets, Georgia Tech’s student chip-design organization. The repository now includes directed and constrained-random verification, plus a SKY130 synthesis and physical design flow. Verification remains in progress, with a load/store handshake issue under investigation; instruction pipelining is planned.'
+ ],links:[['GitHub repository','https://github.com/JoelBiswas/RISC-V-Core']]}
 ];
 export default function Projects(){return <div id="projects" className="mt-8">
  <h2 className="mt-3 mb-3 text-center text-[var(--primary)] text-4xl tracking-[1px]">PROJECTS</h2>

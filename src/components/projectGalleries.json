@@ -79,5 +79,32 @@
       "alt": "Ventilator CAD \u2014 top",
       "source": "https://raw.githubusercontent.com/JoelBiswas/DIYVentilator/HEAD/CAD/Images/Top.png"
     }
+  ],
+  "risc-v-core": [
+    {
+      "file": "risc-v-gallery-2.png",
+      "alt": "CPU architecture diagram",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/CPUArchitecture.png"
+    },
+    {
+      "file": "risc-v-gallery-3.png",
+      "alt": "System architecture diagram",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/SystemArchitecture.png"
+    },
+    {
+      "file": "risc-v-gallery-4.png",
+      "alt": "Verification environment architecture",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/VerificationArchitecture.png"
+    },
+    {
+      "file": "risc-v-gallery-5.png",
+      "alt": "Design rule check report",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/DRC.png"
+    },
+    {
+      "file": "risc-v-gallery-6.png",
+      "alt": "Layout versus schematic report",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/LVS.png"
+    }
   ]
 }
