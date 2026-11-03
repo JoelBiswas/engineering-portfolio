@@ -63,4 +63,12 @@ test('heading arrows scroll the row and clipped headings automatically come into
  results.getBoundingClientRect=()=>({left:450,right:530,width:80});
  fireEvent.mouseEnter(results);
  expect(scrollBy).toHaveBeenLastCalledWith({left:142,behavior:'smooth'});
+ results.getBoundingClientRect=()=>({left:-60,right:20,width:80});
+ fireEvent.mouseEnter(results);
+ expect(scrollBy).toHaveBeenLastCalledWith({left:-72,behavior:'smooth'});
+ fireEvent.mouseMove(row,{clientX:10});
+ expect(scrollBy).toHaveBeenLastCalledWith({left:-140,behavior:'smooth'});
+ fireEvent.mouseMove(row,{clientX:200});
+ fireEvent.mouseMove(row,{clientX:390});
+ expect(scrollBy).toHaveBeenLastCalledWith({left:140,behavior:'smooth'});
 });
