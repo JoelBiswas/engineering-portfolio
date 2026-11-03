@@ -14,16 +14,6 @@
       "file": "r2d2-gallery-3.png",
       "alt": "Droid CAD \u2014 underside",
       "source": "https://raw.githubusercontent.com/JoelBiswas/r2d2/HEAD/CAD/Images/BottomView.png"
-    },
-    {
-      "file": "r2d2-gallery-4.png",
-      "alt": "Controller CAD \u2014 internal layout",
-      "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/OpenView.png"
-    },
-    {
-      "file": "r2d2-gallery-5.png",
-      "alt": "Controller CAD \u2014 top view",
-      "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/TopView.png"
     }
   ],
   "axial-flux": [
@@ -105,6 +95,18 @@
       "file": "risc-v-gallery-6.png",
       "alt": "Layout versus schematic report",
       "source": "https://raw.githubusercontent.com/JoelBiswas/RISC-V-Core/HEAD/Docs/Images/LVS.png"
+    }
+  ],
+  "controller": [
+    {
+      "file": "r2d2-gallery-4.png",
+      "alt": "Controller CAD \u2014 internal layout",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/OpenView.png"
+    },
+    {
+      "file": "r2d2-gallery-5.png",
+      "alt": "Controller CAD \u2014 top view",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/TopView.png"
     }
   ]
 }
