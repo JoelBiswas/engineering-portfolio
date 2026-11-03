@@ -14,6 +14,7 @@ export default function ProjectCard({id,name,tags,technologies,description,links
  const [section,setSection]=useState(0);
  const readme=readmes[id];
  const sections=readmeSections(readme.markdown);
+ const selectedSection=Math.min(section,Math.max(0,sections.length-1));
  const media=images || [{file:id+'.svg',alt:name+' — placeholder image'}];
  const gallery=[...media,...(galleries[id] || [])];
  const imageUrl=item=>process.env.PUBLIC_URL+'/images/engineering/'+item.file;
@@ -50,8 +51,8 @@ export default function ProjectCard({id,name,tags,technologies,description,links
       <figcaption aria-live="polite">{gallery[active].alt} <span>— {active+1}/{gallery.length}</span></figcaption>
      </figure>
     </section>
-    <ProjectSectionTabs id={id} sections={sections} section={section} onSelect={setSection}/>
-    <section className="readme-content" id={id+'-panel'} role="tabpanel" aria-labelledby={id+'-tab-'+section} tabIndex={0}><ReadmeContent body={sections[section].body} repository={readme.repository}/></section>
+    {sections.length>0 && <ProjectSectionTabs id={id} sections={sections} section={selectedSection} onSelect={setSection}/>}
+    {sections.length>0 && <section className="readme-content" id={id+'-panel'} role="tabpanel" aria-labelledby={id+'-tab-'+selectedSection} tabIndex={0}><ReadmeContent body={sections[selectedSection].body} repository={readme.repository}/></section>}
     <div className="project-links">{links.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}</div>
    </div>
   </dialog>

@@ -22,7 +22,11 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sync:readmes": "node scripts/sync-project-readmes.mjs",
+    "prestart": "npm run sync:readmes",
+    "prebuild": "npm run sync:readmes",
+    "test:readme-sync": "node --test scripts/sync-project-readmes.test.mjs"
   },
   "eslintConfig": {
     "extends": [

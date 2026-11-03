@@ -1,43 +1,65 @@
 # Joel Biswas — Engineering Portfolio
 
-An engineering edition of the original React/Tailwind portfolio, retaining its teal/cream palette, Lalezar and Lekton fonts, orbiting portrait, scrolling skills, project cards, and contact layout.
+React/Tailwind engineering portfolio with separate RISC-V core, R2-D2, RF controller, axial-flux motor, and ventilator projects.
 
-## Projects
+## Local preview and builds
 
-- 32-bit RISC-V Core
-
-- R2-D2 + Custom Controller
-- 12 V Axial-Flux Motor
-- Budget Ventilator
-
-Select a project image or title to open its details. Close with the Close button or Escape. Repository links are included for the droid, controller, and motor.
-
-## Run and build
-
-With Node.js and pnpm installed:
+Use Node.js 22 or later:
 
 ```sh
-pnpm install
-pnpm start
-pnpm build
+npm ci
+npm start
+npm run build
 ```
 
-The production site is in `build/`. Serve that directory using any static web server. The relative asset paths support deployment under a subdirectory. This copy has not been published.
+`npm start` and `npm run build` automatically refresh project content from the GitHub READMEs before starting. An already running preview does not poll GitHub; restart it or run the sync command to pick up later edits:
 
-## Project images
+```sh
+npm run sync:readmes
+```
 
-Project photos and CAD renders are stored locally in `public/images/engineering/`, sourced from the public GitHub repositories. R2-D2 and its controller share a two-image card. The motor and ventilator use CAD assembly images. The RISC-V core retains its placeholder as requested.
+The preview reloads when the saved README data changes. Production output is in `build/`. Building does not publish the site.
 
-The `images` arrays in `src/components/Projects.jsx` control each card’s image filenames and alt text. The same images appear in project details. Source URLs are recorded in `IMAGE-SOURCES.json`. The files are bundled with the site rather than loaded from GitHub at runtime.
+## README synchronization
 
-Project descriptions, specifications, tags, and links are also in `Projects.jsx`. The original portrait is retained. Engineering skill icons are simple custom SVG illustrations, not official product logos.
+`scripts/sync-project-readmes.mjs` downloads `README.md` from each project's default branch. Repository URLs live in `src/components/projectReadmes.json`; that file also holds the last successful content snapshot.
 
-## Contact
+The sync extracts the README's main title and first prose paragraph for the subtitle, then retains the Markdown for the information tabs. If a README has no introductory paragraph, the subtitle comes from the first section's prose. `ReadmeContent.jsx` continues to hide repository-overview sections, empty or placeholder sections, and images. Image-only tabs are omitted. The project cards use the subtitle's first sentence as their summary.
 
-The form retains the original portfolio's EmailJS service and template. Form labels, sending state, error feedback, and success reset were improved. No real email was sent during verification; confirm EmailJS allowed domains and delivery before publishing.
+Galleries, images, tags, technologies, styling, and project order are maintained separately and are not changed by README sync.
 
-## Content sources
+Failed fetches or invalid README content retain the corresponding saved project snapshot and print a warning. For strict validation, which fails without writing any partial updates:
 
-R2-D2 and controller: local hardware README files and existing personal project notes. Motor: existing personal project notes (12 V, dual rotor/single stator, 9 coils, 12 magnets per rotor, Onshape/Fusion 360). Ventilator: the ventilator bullets in the earlier resume (the surrounding project heading in that draft had been changed to RISC-V). No clinical performance, cost, or measured motor-output claims have been added.
+```sh
+npm run sync:readmes -- --strict
+```
 
-RISC-V content is based on the existing project notes and SiliconJackets onboarding context: completed RTL design of a 32-bit subset core, verification in progress, and physical design as a later stage. No tapeout, full ISA compliance, or performance claims are made.
+For intentionally offline builds:
+
+```sh
+README_SYNC_OFFLINE=1 npm run build
+```
+
+The sync runs only during development/build tooling, so visitors do not make GitHub requests or wait for README downloads.
+
+## Scheduled refresh — no deployment
+
+`.github/workflows/refresh-project-content.yml` prepares a fresh build daily at 13:23 UTC or when manually triggered in GitHub Actions. It runs synchronization in strict mode and uploads the build and refreshed content as a `refreshed-portfolio-preview` artifact for seven days. It does not commit, push, or deploy anything.
+
+This workflow is currently local and inactive. Its schedule becomes available after it is pushed to the repository's default branch. Publishing remains a separate action; this change does not update the live website automatically.
+
+## Verification
+
+```sh
+npm run test:readme-sync
+CI=true npm test -- --watchAll=false --runInBand
+npm run build
+```
+
+Sync tests exercise updated titles/headings, READMEs without introductory paragraphs, fetch failures, cache retention, and strict failure behavior without making network requests.
+
+## Assets and contact
+
+Project photos and CAD renders are bundled in `public/images/engineering/`. Gallery configuration is in `src/components/projectGalleries.json` and `Projects.jsx`. Skill cards use local illustrations and brand logos with local fallbacks. Asset sources are recorded in `IMAGE-SOURCES.json`.
+
+The contact form retains the portfolio's EmailJS configuration. No real email is sent during verification.

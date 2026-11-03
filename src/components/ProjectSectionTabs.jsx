@@ -1,17 +1,18 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
+
+const behavior=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
 
 export default function ProjectSectionTabs({id,sections,section,onSelect}) {
  const row=useRef(null);
- const behavior=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
- const reveal=button=>{
+ const reveal=useCallback(button=>{
   if(!button || !row.current)return;
   const container=row.current.getBoundingClientRect();
   const tab=button.getBoundingClientRect();
   const offset=tab.width>container.width || tab.left<container.left+12
    ?tab.left-container.left-12:tab.right>container.right-12?tab.right-container.right+12:0;
   if(offset)row.current.scrollBy({left:offset,behavior:behavior()});
- };
- useEffect(()=>{reveal(row.current?.children[section]);},[section]);
+ },[]);
+ useEffect(()=>{reveal(row.current?.children[section]);},[section,reveal]);
  const scroll=direction=>row.current.scrollBy({left:direction*row.current.clientWidth*.7,behavior:behavior()});
  return <div className="project-tab-navigation">
   <button type="button" className="section-scroll-arrow" aria-label="Scroll headings left" onClick={()=>scroll(-1)}>‹</button>
