@@ -1,5 +1,6 @@
 import {fireEvent, render, screen, within} from '@testing-library/react';
 import Projects from './Projects';
+import {readmeSections} from './ReadmeContent';
 
 beforeAll(()=>{
  HTMLDialogElement.prototype.showModal=function(){this.open=true;};
@@ -20,7 +21,7 @@ test('R2-D2 and the controller have separate cards, READMEs, and galleries',()=>
  fireEvent.click(within(dialog).getByRole('button',{name:'Previous photo'}));
  expect(within(dialog).getByText('— 4/4')).toBeInTheDocument();
  fireEvent.keyDown(within(dialog).getByRole('tab',{name:'About R2-D2'}),{key:'ArrowRight'});
- expect(within(dialog).getByRole('tab',{name:'Overview of this Repo'})).toHaveAttribute('aria-selected','true');
+ expect(within(dialog).getByRole('tab',{name:'Designing the Robot'})).toHaveAttribute('aria-selected','true');
 });
 
 test('README tables and image-only sections remain available',()=>{
@@ -32,4 +33,10 @@ test('README tables and image-only sections remain available',()=>{
  expect(within(dialog).getByRole('table')).toHaveTextContent('Core dimensions');
  fireEvent.click(within(dialog).getByRole('tab',{name:'CPU Architecture'}));
  expect(within(dialog).getByRole('tabpanel').querySelectorAll('img')).toHaveLength(2);
+});
+
+
+test('section filtering removes repo guides and empty or placeholder sections but retains diagrams',()=>{
+ const sections=readmeSections('## Repository Structure\nFolder list\n## Blank\n\n## Planned\nTODO\n## Diagram\n![Architecture](diagram.png)\n## About the Project\nWorking robot.');
+ expect(sections.map(section=>section.heading)).toEqual(['Diagram','About the Project']);
 });

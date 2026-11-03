@@ -19,8 +19,11 @@ export function readmeSections(markdown) {
   else current.body.push(line);
  });
  if(current.heading || current.body.join('').trim())sections.push(current);
- // The opening paragraph is the subtitle; tabs retain the README's actual headings.
- return sections.filter(section=>section.heading);
+ // Keep project content and image-based sections; omit repository guides and unfinished text.
+ const isPlaceholder=line=>/^(?:todo|tbd|coming soon|placeholder(?: text)?|to be (?:added|written)|work in progress)[.!…]*$/i.test(line.trim());
+ return sections.map(section=>({...section,body:section.body.filter(line=>!isPlaceholder(line))}))
+  .filter(section=>section.heading && !/^(?:repository structure|overview of (?:this |the )?repo(?:sitory)?|guide to (?:this |the )?repo(?:sitory)?)$/i.test(section.heading.trim())
+   && section.body.some(line=>line.trim() && !/^#+\s/.test(line)));
 }
 export default function ReadmeContent({body,repository}) {
  const blocks=[];let i=0;
