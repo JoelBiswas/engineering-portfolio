@@ -33,8 +33,8 @@ export default function ProjectCard({id,name,tags,technologies,description,links
     <section className="project-gallery" aria-label={readme.title+' photo gallery'} tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();advance(1);}if(event.key==='ArrowLeft'){event.preventDefault();advance(-1);}}}>
      <figure>
       <div className="gallery-stage"><img className="gallery-main-image" src={imageUrl(gallery[active])} alt={gallery[active].alt}/>
-       <button type="button" className="gallery-arrow gallery-prev" onClick={()=>advance(-1)} aria-label="Previous photo">←</button>
-       <button type="button" className="gallery-arrow gallery-next" onClick={()=>advance(1)} aria-label="Next photo">→</button>
+       <button type="button" className="gallery-arrow gallery-prev" onClick={()=>advance(-1)} aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg></button>
+       <button type="button" className="gallery-arrow gallery-next" onClick={()=>advance(1)} aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>
       </div>
       <div className="gallery-dots">{gallery.map((item,index)=><button type="button" key={item.file} aria-label={'Show '+item.alt} aria-pressed={active===index} onClick={()=>setActive(index)}/>)}</div>
       <figcaption aria-live="polite">{gallery[active].alt} <span>— {active+1}/{gallery.length}</span></figcaption>
