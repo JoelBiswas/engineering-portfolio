@@ -40,7 +40,7 @@ const Contact = () => {
 
   return (
     <div id='contact' className='mt-8'>
-      <h2 className='text-center text-[var(--primary)] tracking-[1px] text-4xl'>CONTACT ME</h2>
+      <h2 className='text-center text-[var(--primary)] tracking-[1px] text-4xl'>Contact Me</h2>
       <h2 className='text-center mt-3 text-[44px] text-[var(--primary)]'>I would love to work with you!</h2>
       <div className='flex flex-col md:flex-row items-center justify-center px-8 py-8 gap-8'>
         <div className='w-full md:w-2/3'>

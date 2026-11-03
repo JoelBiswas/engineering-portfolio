@@ -5,11 +5,9 @@ const areas = [
  ['Embedded Systems','I connect code with hardware using ESP32 microcontrollers, C++, and wireless communication.'],
  ['Digital & RTL Design','I design digital hardware in SystemVerilog, from instruction decoding and ALUs to processor control and memory interfaces.'],
  ['Robotics','I integrate motor control, power distribution, and mechanical design into robots that move.'],
- ['Prototyping','I turn designs into physical builds through 3D printing, soldering, testing, and iteration.'],
- ['Simulation & Analysis','I use Cadence Xcelium for RTL simulation and Fusion 360 for mechanical stress analysis.']
 ];
 export default function About(){return <div id="about" className="mt-8">
- <h2 className="text-center text-4xl text-[var(--primary)] tracking-[1px]">ABOUT</h2>
+ <h2 className="text-center text-4xl text-[var(--primary)] tracking-[1px]">About</h2>
  <div className="md:flex items-center">
   <div className="my-5 md:my-0 md:ml-8 md:mr-4 w-full md:w-1/3 flex flex-col gap-5 px-4 md:px-0">{areas.map(([name,description])=><AboutCard key={name} name={name} description={description}/>)}</div>
   <div className="w-full md:w-2/3 px-4 md:pl-0 md:pr-8 flex flex-col gap-5 about-copy">

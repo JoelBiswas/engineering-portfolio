@@ -9,6 +9,6 @@ const projects = [
  {id:'ventilator',images:[{file:'ventilator-cad.png',alt:'CAD render of the ventilator compression linkage and AMBU bag'}],tags:['Electromechanical Design','Embedded Control','Prototyping'],technologies:['Onshape','ESP32','C++','Motor Control']}
 ];
 export default function Projects(){return <div id="projects" className="mt-8">
- <h2 className="mt-3 mb-3 text-center text-[var(--primary)] text-4xl tracking-[1px]">PROJECTS</h2>
- <div className="project-list">{projects.map(project=><ProjectCard key={project.id} {...project} name={readmes[project.id].title} description={readmes[project.id].subtitle} links={[["GitHub repository",readmes[project.id].repository]]}/>)}</div>
+ <h2 className="mt-3 mb-3 text-center text-[var(--primary)] text-4xl tracking-[1px]">Projects</h2>
+ <div className="project-list">{projects.map(project=><ProjectCard key={project.id} {...project} name={readmes[project.id].title} description={readmes[project.id].subtitle.split(/(?<=\.)\s/)[0]} links={[["GitHub repository",readmes[project.id].repository]]}/>)}</div>
 </div>}

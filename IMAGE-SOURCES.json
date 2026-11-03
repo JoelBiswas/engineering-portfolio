@@ -2,5 +2,14 @@
   "r2d2-photo.jpg": "https://github.com/user-attachments/assets/d81d2307-1279-4c8e-9341-65435ef9c383",
   "controller-cad.png": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/main/CAD/Images/FrontRightView.png",
   "motor-cad.png": "https://raw.githubusercontent.com/JoelBiswas/Axial-Flux-Motor/main/CAD/FullMotor.png",
-  "ventilator-cad.png": "https://raw.githubusercontent.com/JoelBiswas/DIYVentilator/main/CAD/Images/Isometric.png"
+  "ventilator-cad.png": "https://raw.githubusercontent.com/JoelBiswas/DIYVentilator/main/CAD/Images/Isometric.png",
+  "skill-logos": {
+    "C++": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg",
+    "KiCad": "https://cdn.simpleicons.org/kicad/314CB0",
+    "ESP32": "https://cdn.simpleicons.org/espressif/E7352C",
+    "Onshape": "https://cdn.simpleicons.org/onshape/1B8600",
+    "Fusion 360 (Autodesk)": "https://cdn.simpleicons.org/autodesk/ED7427",
+    "Python": "src/images/skills/python.png",
+    "Git": "src/images/skills/git.png"
+  }
 }

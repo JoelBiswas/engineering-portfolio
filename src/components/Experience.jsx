@@ -31,7 +31,7 @@ const roles = [
 
 export default function Experience() {
   return <section id="experience" className="experience-section" aria-labelledby="experience-title">
-    <h2 id="experience-title" className="text-center text-[var(--primary)] text-4xl tracking-[1px]">WORK EXPERIENCE</h2>
+    <h2 id="experience-title" className="text-center text-[var(--primary)] text-4xl tracking-[1px]">Work Experience</h2>
     <div className="experience-list">{roles.map(item => <article className="experience-role" key={item.company}>
       <div className="experience-heading">
         <p className="experience-dates">{item.dates}</p>
