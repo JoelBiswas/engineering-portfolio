@@ -1,5 +1,6 @@
 import React, {useRef, useState} from 'react';
 import galleries from './projectGalleries.json';
+import ProjectSectionTabs from './ProjectSectionTabs';
 import readmes from './projectReadmes.json';
 import ReadmeContent, {readmeSections} from './ReadmeContent';
 import ProjectTag from './ProjectTag';
@@ -40,7 +41,7 @@ export default function ProjectCard({id,name,tags,technologies,description,links
       <figcaption aria-live="polite">{gallery[active].alt} <span>— {active+1}/{gallery.length}</span></figcaption>
      </figure>
     </section>
-    <div className="project-section-tabs" role="tablist" aria-label="README sections">{sections.map((item,index)=><button type="button" key={item.heading} id={id+'-tab-'+index} role="tab" aria-selected={section===index} aria-controls={id+'-panel'} tabIndex={section===index?0:-1} onClick={()=>setSection(index)} onKeyDown={event=>{let next;if(event.key==='ArrowRight')next=(index+1)%sections.length;else if(event.key==='ArrowLeft')next=(index-1+sections.length)%sections.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=sections.length-1;else return;event.preventDefault();setSection(next);event.currentTarget.parentElement.children[next].focus();}}>{item.heading}</button>)}</div>
+    <ProjectSectionTabs id={id} sections={sections} section={section} onSelect={setSection}/>
     <section className="readme-content" id={id+'-panel'} role="tabpanel" aria-labelledby={id+'-tab-'+section} tabIndex={0}><ReadmeContent body={sections[section].body} repository={readme.repository}/></section>
     <div className="project-links">{links.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}</div>
    </div>
