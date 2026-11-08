@@ -1,9 +1,9 @@
 import React from 'react';
 import AboutCard from './AboutCard';
 const areas = [
- ['Electrical Design','I design schematics and PCBs, bringing together power, microcontrollers, and peripheral interfaces.'],
+ ['PCB Design','I design schematics and PCBs, bringing together power, microcontrollers, and peripheral interfaces.'],
  ['Embedded Systems','I connect code with hardware using ESP32 microcontrollers, C++, and wireless communication.'],
- ['Digital & RTL Design','I design digital hardware in SystemVerilog, from instruction decoding and ALUs to processor control and memory interfaces.'],
+ ['Digital Design and Verification','I design digital hardware in SystemVerilog, from instruction decoding and ALUs to processor control and memory interfaces.'],
  ['Robotics','I integrate motor control, power distribution, and mechanical design into robots that move.'],
 ];
 export default function About(){return <div id="about" className="mt-8">
