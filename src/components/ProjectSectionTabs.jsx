@@ -26,7 +26,7 @@ export default function ProjectSectionTabs({id,sections,section,onSelect}) {
  const scroll=direction=>row.current.scrollBy({left:direction*row.current.clientWidth*.7,behavior:behavior()});
  return <div className="project-tab-navigation">
   <button type="button" className="section-scroll-arrow" aria-label="Scroll headings left" onClick={()=>scroll(-1)}>‹</button>
-  <div ref={row} className="project-section-tabs" role="tablist" aria-label="README sections" onMouseMove={scrollAtEdge} onMouseLeave={()=>{hoverEdge.current=0;}}>
+  <div ref={row} className="project-section-tabs" role="tablist" aria-label="Project sections" onMouseMove={scrollAtEdge} onMouseLeave={()=>{hoverEdge.current=0;}}>
    {sections.map((item,index)=><button type="button" key={item.heading} id={id+'-tab-'+index} role="tab" aria-selected={section===index} aria-controls={id+'-panel'} tabIndex={section===index?0:-1} onFocus={event=>reveal(event.currentTarget)} onMouseEnter={event=>reveal(event.currentTarget)} onClick={()=>onSelect(index)} onKeyDown={event=>{
     let next;
     if(event.key==='ArrowRight')next=(index+1)%sections.length;

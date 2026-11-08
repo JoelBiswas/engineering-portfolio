@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
-import readmes from './projectReadmes.json';
+import projectContent from './projectContent.json';
 const projects = [
  {id:'risc-v-core',images:[{file:'risc-v-gallery-1.png',alt:'RISC-V core physical layout'}],tags:['Chip Design','SystemVerilog','RTL'],technologies:['SystemVerilog','RISC-V','Xcelium']},
  {id:'r2d2',images:[{file:'r2d2-photo.jpg',alt:'Photo of the assembled 3D-printed R2-D2 droid'}],tags:['Robotics','Embedded Systems'],technologies:['ESP32','KiCad','Onshape']},
@@ -10,5 +10,5 @@ const projects = [
 ];
 export default function Projects(){return <div id="projects" className="mt-8">
  <h2 className="mt-3 mb-3 text-center text-[var(--primary)] text-4xl tracking-[1px]">Projects</h2>
- <div className="project-list">{projects.map(project=><ProjectCard key={project.id} {...project} name={readmes[project.id].title} description={readmes[project.id].subtitle.split(/(?<=\.)\s/)[0]} links={[["GitHub repository",readmes[project.id].repository]]}/>)}</div>
+ <div className="project-list">{projects.map(project=><ProjectCard key={project.id} {...project} name={projectContent[project.id].title} description={projectContent[project.id].subtitle.split(/(?<=\.)\s/)[0]} links={[["GitHub repository",projectContent[project.id].repository]]}/>)}</div>
 </div>}

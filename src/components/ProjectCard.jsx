@@ -2,8 +2,8 @@ import React, {useRef, useState} from 'react';
 import {AnimatePresence, motion, useReducedMotion} from 'framer-motion';
 import galleries from './projectGalleries.json';
 import ProjectSectionTabs from './ProjectSectionTabs';
-import readmes from './projectReadmes.json';
-import ReadmeContent, {readmeSections} from './ReadmeContent';
+import projectContent from './projectContent.json';
+import ReadmeContent from './ReadmeContent';
 import ProjectTag from './ProjectTag';
 import ProjectTechnology from './ProjectTechnology';
 export default function ProjectCard({id,name,tags,technologies,description,links,images}){
@@ -12,8 +12,8 @@ export default function ProjectCard({id,name,tags,technologies,description,links
  const [direction,setDirection]=useState(1);
  const reducedMotion=useReducedMotion();
  const [section,setSection]=useState(0);
- const readme=readmes[id];
- const sections=readmeSections(readme.markdown);
+ const project=projectContent[id];
+ const sections=project.sections;
  const selectedSection=Math.min(section,Math.max(0,sections.length-1));
  const media=images || [{file:id+'.svg',alt:name+' — placeholder image'}];
  const gallery=[...media,...(galleries[id] || [])];
@@ -28,15 +28,15 @@ export default function ProjectCard({id,name,tags,technologies,description,links
    <span className="project-hover">CLICK TO VIEW PROJECT</span>
   </button>
   <div className="project-card-copy">
-   <h2 className="text-[var(--light)] text-2xl underline"><button type="button" onClick={openProject}>{readme.title}</button></h2>
+   <h2 className="text-[var(--light)] text-2xl underline"><button type="button" onClick={openProject}>{project.title}</button></h2>
    <div className="flex gap-2 mb-3 flex-wrap">{tags.map(tag=><ProjectTag key={tag} name={tag}/>)}</div>
    <p className="project-description">{description}</p>
    <div className="flex gap-2 flex-wrap">{technologies.map(name=><ProjectTechnology key={name} name={name} image={process.env.PUBLIC_URL+'/images/engineering/'+name.toLowerCase().replaceAll(' ','-').replaceAll('+','p')+'.svg'}/>)}</div>
   </div>
   <dialog ref={dialog} className="project-dialog" aria-labelledby={id+'-title'} onClick={e=>{if(e.target===dialog.current)dialog.current.close();}}>
    <div className="dialog-content"><form method="dialog"><button className="dialog-close" aria-label="Close project details">Close ×</button></form>
-    <header className="project-detail-header"><h2 id={id+'-title'}>{readme.title}</h2><p className="project-subtitle">{readme.subtitle}</p></header>
-    <section className="project-gallery" aria-label={readme.title+' photo gallery'} tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();advance(1);}if(event.key==='ArrowLeft'){event.preventDefault();advance(-1);}}}>
+    <header className="project-detail-header"><h2 id={id+'-title'}>{project.title}</h2><p className="project-subtitle">{project.subtitle}</p></header>
+    <section className="project-gallery" aria-label={project.title+' photo gallery'} tabIndex={0} onKeyDown={event=>{if(event.key==='ArrowRight'){event.preventDefault();advance(1);}if(event.key==='ArrowLeft'){event.preventDefault();advance(-1);}}}>
      <figure>
       <div className="gallery-stage">
        <div className="gallery-slide-viewport"><AnimatePresence initial={false} custom={direction}>
@@ -52,7 +52,7 @@ export default function ProjectCard({id,name,tags,technologies,description,links
      </figure>
     </section>
     {sections.length>0 && <ProjectSectionTabs id={id} sections={sections} section={selectedSection} onSelect={setSection}/>}
-    {sections.length>0 && <section className="readme-content" id={id+'-panel'} role="tabpanel" aria-labelledby={id+'-tab-'+selectedSection} tabIndex={0}><ReadmeContent body={sections[selectedSection].body} repository={readme.repository}/></section>}
+    {sections.length>0 && <section className="readme-content" id={id+'-panel'} role="tabpanel" aria-labelledby={id+'-tab-'+selectedSection} tabIndex={0}><ReadmeContent body={sections[selectedSection].body} repository={project.repository}/></section>}
     <div className="project-links">{links.map(([label,url])=><a key={url} href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}</div>
    </div>
   </dialog>

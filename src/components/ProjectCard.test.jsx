@@ -8,33 +8,33 @@ beforeAll(()=>{
  HTMLDialogElement.prototype.close=function(){this.open=false;};
 });
 
-test('R2-D2 and the controller have separate cards, READMEs, and galleries',()=>{
+test('R2-D2 and the controller have separate project stories and galleries',()=>{
  render(<Projects/>);
- const droid=screen.getByRole('button',{name:'Read about R2-D2 - A Robotics Journey'}).closest('article');
- const controller=screen.getByRole('button',{name:'Read about Custom Star Wars RF Controller'}).closest('article');
+ const droid=screen.getByRole('button',{name:'Read about R2-D2 Droid'}).closest('article');
+ const controller=screen.getByRole('button',{name:'Read about Custom RF Controller'}).closest('article');
  expect(droid).not.toBe(controller);
- fireEvent.click(within(droid).getByRole('button',{name:'Read about R2-D2 - A Robotics Journey'}));
+ fireEvent.click(within(droid).getByRole('button',{name:'Read about R2-D2 Droid'}));
  const dialog=within(droid).getByRole('dialog');
  expect(within(dialog).getAllByRole('button',{name:/^Show /})).toHaveLength(4);
  expect(within(dialog).queryByRole('button',{name:/Show Controller/})).not.toBeInTheDocument();
- fireEvent.click(within(dialog).getByRole('tab',{name:'About R2-D2'}));
+ fireEvent.click(within(dialog).getByRole('tab',{name:'What I Built'}));
  expect(within(dialog).getByRole('tabpanel')).toHaveTextContent('PS3 controller');
  fireEvent.click(within(dialog).getByRole('button',{name:'Previous photo'}));
  expect(within(dialog).getByText('— 4/4')).toBeInTheDocument();
- fireEvent.keyDown(within(dialog).getByRole('tab',{name:'About R2-D2'}),{key:'ArrowRight'});
- expect(within(dialog).getByRole('tab',{name:'Designing the Robot'})).toHaveAttribute('aria-selected','true');
+ fireEvent.keyDown(within(dialog).getByRole('tab',{name:'What I Built'}),{key:'ArrowRight'});
+ expect(within(dialog).getByRole('tab',{name:'Mechanical Design'})).toHaveAttribute('aria-selected','true');
 });
 
-test('README tables remain available and information panels contain no images',()=>{
+test('curated project results render with tables and text-only information panels',()=>{
  render(<Projects/>);
- const article=screen.getByRole('button',{name:'Read about RISC-V-Core'}).closest('article');
- fireEvent.click(within(article).getByRole('button',{name:'Read about RISC-V-Core'}));
+ const article=screen.getByRole('button',{name:'Read about 32-bit RISC-V Processor'}).closest('article');
+ fireEvent.click(within(article).getByRole('button',{name:'Read about 32-bit RISC-V Processor'}));
  const dialog=within(article).getByRole('dialog');
- fireEvent.click(within(dialog).getByRole('tab',{name:'Results'}));
+ fireEvent.click(within(dialog).getByRole('tab',{name:'Results & Next Steps'}));
  expect(within(dialog).getByRole('table')).toHaveTextContent('Core dimensions');
  expect(within(dialog).getByRole('tabpanel').querySelectorAll('img')).toHaveLength(0);
  expect(within(dialog).queryByRole('tab',{name:'CPU Architecture'})).not.toBeInTheDocument();
- fireEvent.click(within(dialog).getByRole('tab',{name:'Overview'}));
+ fireEvent.click(within(dialog).getByRole('tab',{name:'What I Built'}));
  expect(within(dialog).getByRole('tabpanel').querySelectorAll('img')).toHaveLength(0);
 });
 
@@ -48,8 +48,8 @@ test('section filtering removes repo guides and empty or placeholder sections an
 test('heading arrows scroll the row and clipped headings automatically come into view',()=>{
  const scrollBy=jest.fn();
  render(<Projects/>);
- const article=screen.getByRole('button',{name:'Read about RISC-V-Core'}).closest('article');
- fireEvent.click(within(article).getByRole('button',{name:'Read about RISC-V-Core'}));
+ const article=screen.getByRole('button',{name:'Read about 32-bit RISC-V Processor'}).closest('article');
+ fireEvent.click(within(article).getByRole('button',{name:'Read about 32-bit RISC-V Processor'}));
  const dialog=within(article).getByRole('dialog');
  const row=within(dialog).getByRole('tablist');
  row.scrollBy=scrollBy;
@@ -59,7 +59,7 @@ test('heading arrows scroll the row and clipped headings automatically come into
  expect(scrollBy).toHaveBeenLastCalledWith({left:280,behavior:'smooth'});
  fireEvent.click(within(dialog).getByRole('button',{name:'Scroll headings left'}));
  expect(scrollBy).toHaveBeenLastCalledWith({left:-280,behavior:'smooth'});
- const results=within(dialog).getByRole('tab',{name:'Results'});
+ const results=within(dialog).getByRole('tab',{name:'Results & Next Steps'});
  results.getBoundingClientRect=()=>({left:450,right:530,width:80});
  fireEvent.mouseEnter(results);
  expect(scrollBy).toHaveBeenLastCalledWith({left:142,behavior:'smooth'});

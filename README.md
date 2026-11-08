@@ -1,10 +1,8 @@
 # Joel Biswas — Engineering Portfolio
 
-React/Tailwind engineering portfolio with separate RISC-V core, R2-D2, RF controller, axial-flux motor, and ventilator projects.
+React/Tailwind portfolio presenting five engineering projects: a RISC-V processor, R2-D2 droid, RF controller, axial-flux motor, and AMBU-bag compression prototype.
 
-## Local preview and builds
-
-Use Node.js 22 or later:
+## Preview and build
 
 ```sh
 npm ci
@@ -12,51 +10,42 @@ npm start
 npm run build
 ```
 
-`npm start` and `npm run build` automatically refresh project content from the GitHub READMEs before starting. An already running preview does not poll GitHub; restart it or run the sync command to pick up later edits:
+Use Node.js 22 or later. Production output is in `build/`. These commands do not publish anything or fetch replacement project copy from GitHub.
+
+## Curated project stories
+
+`src/components/projectContent.json` is the source of the project titles, subtitles, and information sections. Each project has a short recruiter-facing introduction followed by sections covering the design, engineering decisions, process, and outcomes. Project-specific headings keep the stories relevant to the work rather than following a repository's file structure.
+
+Each section has a `heading` and a `body` array of text lines. Blank lines separate paragraphs; the existing renderer supports inline emphasis, lists, links, and tables. Images remain in the galleries. `Projects.jsx` controls card order, images, tags, and technologies.
+
+The copy was grounded in the saved project READMEs and design journals. It distinguishes documented design work and simulation results from measured hardware performance. Club-provided components are credited in the processor story. Project stories should be deliberately updated as new results become available.
+
+## Optional reference refresh
+
+The previous README-fetching tool is retained only for refreshing background reference material:
 
 ```sh
 npm run sync:readmes
 ```
 
-The preview reloads when the saved README data changes. Production output is in `build/`. Building does not publish the site.
+It writes to `src/components/projectReadmes.json`, which is not imported by the website. It cannot overwrite the curated stories in `projectContent.json`. Neither local startup nor production builds invoke it automatically.
 
-## README synchronization
+## Preview workflow
 
-`scripts/sync-project-readmes.mjs` downloads `README.md` from each project's default branch. Repository URLs live in `src/components/projectReadmes.json`; that file also holds the last successful content snapshot.
-
-The sync extracts the README's main title and first prose paragraph for the subtitle, then retains the Markdown for the information tabs. If a README has no introductory paragraph, the subtitle comes from the first section's prose. `ReadmeContent.jsx` continues to hide repository-overview sections, empty or placeholder sections, and images. Image-only tabs are omitted. The project cards use the subtitle's first sentence as their summary.
-
-Galleries, images, tags, technologies, styling, and project order are maintained separately and are not changed by README sync.
-
-Failed fetches or invalid README content retain the corresponding saved project snapshot and print a warning. For strict validation, which fails without writing any partial updates:
-
-```sh
-npm run sync:readmes -- --strict
-```
-
-For intentionally offline builds:
-
-```sh
-README_SYNC_OFFLINE=1 npm run build
-```
-
-The sync runs only during development/build tooling, so visitors do not make GitHub requests or wait for README downloads.
-
-## Scheduled refresh — no deployment
-
-`.github/workflows/refresh-project-content.yml` prepares a fresh build daily at 13:23 UTC or when manually triggered in GitHub Actions. It runs synchronization in strict mode and uploads the build and refreshed content as a `refreshed-portfolio-preview` artifact for seven days. It does not commit, push, or deploy anything.
-
-This workflow is currently local and inactive. Its schedule becomes available after it is pushed to the repository's default branch. Publishing remains a separate action; this change does not update the live website automatically.
+`.github/workflows/portfolio-preview.yml` is manual-only. It runs the UI tests, builds the site, and uploads a `portfolio-preview` artifact. It has no schedule and does not commit, push, or deploy anything. Publishing remains a separate action.
 
 ## Verification
 
 ```sh
-npm run test:readme-sync
 CI=true npm test -- --watchAll=false --runInBand
 npm run build
 ```
 
-Sync tests exercise updated titles/headings, READMEs without introductory paragraphs, fetch failures, cache retention, and strict failure behavior without making network requests.
+The optional reference-fetching tool has its own tests:
+
+```sh
+npm run test:readme-sync
+```
 
 ## Assets and contact
 

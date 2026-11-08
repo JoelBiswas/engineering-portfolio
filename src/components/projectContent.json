@@ -1,0 +1,245 @@
+{
+  "risc-v-core": {
+    "title": "32-bit RISC-V Processor",
+    "subtitle": "A SystemVerilog processor project spanning RTL design, functional verification, and SKY130 physical implementation.",
+    "repository": "https://github.com/JoelBiswas/RISC-V-Core",
+    "sections": [
+      {
+        "heading": "What I Built",
+        "body": [
+          "I designed a 32-bit processor implementing a subset of the RISC-V instruction set, then took it through simulation, synthesis, and physical implementation. The project connects the logic that executes instructions with the practical constraints of memory timing and chip layout.",
+          "",
+          "I developed it through Georgia Tech SiliconJackets onboarding. My work builds on club-provided components, including the register file, SRAM interface, verification scaffolding, and parts of the physical design flow."
+        ]
+      },
+      {
+        "heading": "Processor Design",
+        "body": [
+          "My RTL work brought together instruction decoding, arithmetic and logic operations, program-counter control, and memory interfaces. The core supports addition, subtraction, logical shifts, word loads and stores, branch-if-zero behavior, and an ebreak-based halt.",
+          "",
+          "The design uses separate instruction and data SRAMs, each storing 1,024 32-bit words. Although instruction execution is not pipelined, SRAM accesses require coordination across clock cycles. That makes the timing of requests, returned data, and CPU state updates a central design problem."
+        ]
+      },
+      {
+        "heading": "Verification & Debugging",
+        "body": [
+          "I developed a SystemVerilog verification environment with directed tests, constrained-random programs, a driver, a monitor, a scoreboard, and a reference model. The scoreboard compares register state and memory activity against expected instruction behavior; assertions check invariants such as x0 remaining zero and the program counter staying word-aligned.",
+          "",
+          "My debugging process is to reduce a mismatch to a short instruction sequence, inspect the corresponding waveforms in Xcelium and SimVision, and trace the first incorrect state transition. Testing memory and branch dependencies is especially important because an error can surface several operations after its cause."
+        ]
+      },
+      {
+        "heading": "Physical Implementation",
+        "body": [
+          "I used Synopsys Design Compiler and Cadence Innovus within the SiliconJackets SJapr flow to synthesize the design and work through floorplanning, placement, clock-tree synthesis, and routing in SKY130.",
+          "",
+          "The floorplan has a 2:1 aspect ratio and accommodates two SRAM macros alongside the standard cells. Macro placement, halos, and power routing made the physical consequences of architectural choices visible: a correct RTL description still needs a layout that can meet timing and manufacturing rules."
+        ]
+      },
+      {
+        "heading": "Results & Next Steps",
+        "body": [
+          "The current physical implementation provides a concrete layout to inspect and improve.",
+          "",
+          "| Item | Current implementation |",
+          "|---|---|",
+          "| Core dimensions | 1,271.95 \u00d7 635.975 \u00b5m |",
+          "| Core area | Approximately 0.809 mm\u00b2 |",
+          "| Memory | 4 KiB instruction + 4 KiB data |",
+          "| Standard cells | 6,798 |",
+          "| Target clock period | 5 ns; timing closure remains in progress |",
+          "",
+          "Functional verification and DRC/LVS cleanup are ongoing. My next steps are stronger load/store regression tests, better documented coverage, and an instruction pipeline with appropriate hazard handling. The key lesson has been treating RTL, verification, and physical design as connected parts of one engineering process."
+        ]
+      }
+    ]
+  },
+  "r2d2": {
+    "title": "R2-D2 Droid",
+    "subtitle": "A custom droid combining 3D-printed mechanics, three motorized feet, and an independently rotating dome.",
+    "repository": "https://github.com/JoelBiswas/r2d2",
+    "sections": [
+      {
+        "heading": "What I Built",
+        "body": [
+          "I designed and assembled a smaller-scale R2-D2 replica for Hack Club\u2019s Highway to Undercity event. I focused on two functions: driving the droid and rotating its head, rather than trying to reproduce every feature from the films.",
+          "",
+          "This was an individual hardware project that brought together my FRC experience with mechanical CAD, component selection, wiring design, and fabrication. The original control architecture uses a PS3 controller; the custom RF controller is a separate follow-on project."
+        ]
+      },
+      {
+        "heading": "Mechanical Design",
+        "body": [
+          "I modeled the body, legs, feet, and dome in Onshape, incorporating purchased components through their STEP models. Three identical feet each house a 12 V Pololu motor and wheel. The dome sits on a Lazy Susan bearing and connects to a stepper motor through a shaft hub, allowing rotation independently of the body.",
+          "",
+          "I designed access openings and removable covers so components could be installed and serviced. Clearances between printed parts, bolt access, and routes for wires all became part of the CAD work rather than details left until assembly."
+        ]
+      },
+      {
+        "heading": "Electronics & Integration",
+        "body": [
+          "An ESP32 coordinates three DC motor drivers and a stepper driver. A 3S LiPo supplies the system, with a buck converter providing the lower-voltage rail. I created the wiring schematic in KiCad, including a custom symbol for the motor driver.",
+          "",
+          "I chose a wired assembly of motor-driver modules instead of a large custom PCB. A polycarbonate plate inside the body provides a mounting surface, while openings through the body and legs route wiring to the feet. That choice made packaging and service access central parts of the electrical design."
+        ]
+      },
+      {
+        "heading": "Iteration & Lessons",
+        "body": [
+          "I initially considered a life-size droid, then reduced the scope to a smaller build that I could manufacture and assemble myself. I also redesigned the dome after receiving CAD feedback, improving the model\u2019s construction rather than continuing with an inefficient approach.",
+          "",
+          "The build reinforced the value of designing for assembly: small details such as print clearance, removable panels, and a way to reach a bolt can determine whether a complete system is practical to put together."
+        ]
+      },
+      {
+        "heading": "Outcome & Next Steps",
+        "body": [
+          "The project produced a physical droid assembly, mechanical models, printable parts, a wiring schematic, and an assembly plan. It gave me experience managing the interfaces between moving mechanisms, power distribution, and control hardware.",
+          "",
+          "The next validation focus is repeatable testing of drivetrain motion, dome rotation, and the integrated control system. The separate RF-controller project extends this work toward a purpose-built wireless interface."
+        ]
+      }
+    ]
+  },
+  "controller": {
+    "title": "Custom RF Controller",
+    "subtitle": "A Rebel Alliance-inspired controller with a custom PCB, ESP32, radio module, and matching 3D-printed enclosure.",
+    "repository": "https://github.com/JoelBiswas/CustomRFController",
+    "sections": [
+      {
+        "heading": "What I Designed",
+        "body": [
+          "After building the R2-D2 droid around a PS3 controller, I wanted to design its wireless interface myself. I developed a Star Wars-themed controller with two joysticks and six buttons, using the project to deepen my schematic, footprint, and PCB-layout skills.",
+          "",
+          "The design uses an ESP32 and an nRF24L01+ PA/LNA radio module. Greater range than the original Bluetooth interface was a design goal; a measured range improvement is not yet established."
+        ]
+      },
+      {
+        "heading": "PCB & Power Design",
+        "body": [
+          "I designed the schematic and PCB in KiCad around a 2S LiPo input, two MP1584 buck-converter modules, the ESP32, two KY-023 joystick modules, six buttons, and the radio module.",
+          "",
+          "I created custom footprints for five components, including the battery connector, ESP32 module, regulators, joysticks, and radio. Adding component STEP models let me check the physical arrangement as well as the electrical connections. The board uses ground pours on both sides."
+        ]
+      },
+      {
+        "heading": "Board-to-Enclosure Workflow",
+        "body": [
+          "I drew the Rebel Alliance board outline in Onshape and imported it into KiCad as a DXF. Component placement then followed the intended interaction: a joystick on each side, four central buttons, two lower buttons, and a radio antenna extending through the top of the case.",
+          "",
+          "I exported the PCB assembly back into Onshape to design the enclosure around the actual component geometry. The case includes battery supports, PCB standoffs, and printed button extensions so the controls remain accessible with the cover installed."
+        ]
+      },
+      {
+        "heading": "Design Decisions & Lessons",
+        "body": [
+          "The enclosure shape was a real packaging constraint, not just a visual theme. Joystick positions, battery volume, connector access, and the antenna opening had to work together inside the same outline.",
+          "",
+          "Moving the design between KiCad and Onshape helped expose mechanical conflicts earlier. Creating footprints also taught me to treat pin locations and physical dimensions as interfaces that need checking before a board is fabricated."
+        ]
+      },
+      {
+        "heading": "Outcome & Validation Plan",
+        "body": [
+          "The documented work includes the wiring schematic, custom PCB layout, component footprints, enclosure CAD, and printable parts. These deliverables define the hardware for a controller that can be integrated with the droid.",
+          "",
+          "The next steps are firmware bring-up, checking joystick and button inputs, validating packet transmission between radios, and testing behavior when the wireless link is lost. Range and latency measurements would then show whether the original motivation for replacing Bluetooth has been met."
+        ]
+      }
+    ]
+  },
+  "axial-flux": {
+    "title": "Axial-Flux Motor",
+    "subtitle": "A dual-rotor motor design shaped by magnetic air-gap requirements, structural simulation, and component cost.",
+    "repository": "https://github.com/JoelBiswas/Axial-Flux-Motor",
+    "sections": [
+      {
+        "heading": "What I Designed",
+        "body": [
+          "I designed a compact, three-phase axial-flux permanent-magnet motor to explore how electromagnetic requirements affect mechanical design. The nominal 12 V design uses one stator between two rotors, with nine copper coils and twelve permanent magnets per rotor.",
+          "",
+          "My work covered rotor and stator geometry, the shaft and bearings, housing design, component sourcing, and mechanical simulation. The project\u2019s strongest result is a documented design-and-analysis process; measured motor output remains to be established."
+        ]
+      },
+      {
+        "heading": "Motor Architecture",
+        "body": [
+          "The stator\u2019s nine coils are arranged in three phases, with approximately 70 turns of 18 AWG copper wire per coil. Each rotor carries twelve magnets, giving a 3:4 coil-to-magnet count ratio. The rotor diameter is approximately six inches.",
+          "",
+          "I modeled the assembly in Onshape, keeping the stator fixed to the housing while bearings allow the shaft and rotors to turn. Shaft alignment and axial restraint matter because the rotating plates must remain close to the stator without making contact."
+        ]
+      },
+      {
+        "heading": "Air-Gap Tradeoff",
+        "body": [
+          "The central design tradeoff was reducing the rotor-to-stator air gap while allowing for rotor deflection. A smaller gap can improve magnetic coupling, but insufficient clearance risks contact between moving and stationary parts.",
+          "",
+          "Mounting hardware made that tradeoff tangible. A cheaper flanged shaft hub protruded farther than the original face-mounted collar. Accommodating it would have required a larger gap or thicker rotor plates, so component cost could not be evaluated independently of the motor\u2019s geometry."
+        ]
+      },
+      {
+        "heading": "Simulation & Iteration",
+        "body": [
+          "I transferred the assembly to Fusion 360 for a static stress study of a rotor under an assumed 1,000 N axial load. I inspected safety factor, strain, and displacement, with displacement driving the clearance decision.",
+          "",
+          "The study predicted a maximum deflection of approximately 0.006 inches. I used about twice that value to select a 0.012-inch gap, reducing the original 0.05-inch design gap. These are simulation-based design values under an assumed load, rather than measured deflection or a demonstrated torque gain."
+        ]
+      },
+      {
+        "heading": "Results & Next Steps",
+        "body": [
+          "The project produced a complete motor CAD assembly, printable components, a bill of materials, and structural-analysis outputs. The air-gap study replaced an arbitrary clearance with a decision tied to a stated load case and predicted deformation.",
+          "",
+          "The next steps are checking tolerances and actual magnetic loads, building the motor, selecting the drive electronics, and measuring current, temperature, speed, and torque. The main lesson was that mechanical stiffness, magnetic geometry, and sourcing decisions must be considered together."
+        ]
+      }
+    ]
+  },
+  "ventilator": {
+    "title": "AMBU-Bag Compression Prototype",
+    "subtitle": "An electromechanical prototype translating motor rotation into repeatable bag compression using accessible parts.",
+    "repository": "https://github.com/JoelBiswas/DIYVentilator",
+    "sections": [
+      {
+        "heading": "Project Goal",
+        "body": [
+          "I set out to design a low-cost mechanism for automating AMBU-bag compression, motivated by the demand for ventilators during the pandemic. The engineering goal was to control compression depth and repetition rate using a motor-driven mechanism.",
+          "",
+          "I developed the mechanical design in Onshape and the wiring schematic in KiCad. This is a mechanism and controls prototype; clinical performance has not been validated."
+        ]
+      },
+      {
+        "heading": "Mechanical Design",
+        "body": [
+          "I designed a support for the bag, a motor mount, and the compression mechanism around parts I already had available, including a CIM DC motor and a polycarbonate base. Using existing parts helped define a realistic starting point for the geometry and packaging.",
+          "",
+          "I used revolute and fasten mates in the Onshape assembly to constrain the mechanism and inspect its motion. That let me work through how motor rotation would produce the compression stroke before committing to fabrication."
+        ]
+      },
+      {
+        "heading": "Electrical & Control Architecture",
+        "body": [
+          "The electrical design connects an ESP32 to a SPARK MAX motor controller through PWM. A 12 V distribution board supplies the motor controller and a 12 V-to-5 V buck converter; the lower-voltage rail powers the ESP32 and LCD interface.",
+          "",
+          "I created custom KiCad symbols for the motor controller, ESP32 module, buck converter, and LCD. The design intent is to expose compression-rate and depth controls through the embedded interface. Actual delivered air volume would require measurement rather than inference from motor commands alone."
+        ]
+      },
+      {
+        "heading": "Designing for Assembly",
+        "body": [
+          "I added the fastening hardware to the CAD assembly and revised parts to limit assembly to two bolt sizes. Nut inserts in the printed parts provide a practical way to install and remove fasteners without relying on repeatedly threading directly into plastic.",
+          "",
+          "This project made manufacturing choices part of the mechanism design: assembly access, repeatable alignment, and replaceable parts matter alongside the intended motion."
+        ]
+      },
+      {
+        "heading": "Outcome & Next Steps",
+        "body": [
+          "The documented outcome is a completed mechanical CAD assembly and wiring schematic, with the motion and electrical interfaces defined. The work connects mechanism design, component reuse, power distribution, and embedded control in one system.",
+          "",
+          "The next engineering steps are bench testing stroke repeatability, motor loading, and actual flow and pressure, followed by appropriate sensing and fault handling. Those measurements would establish how closely the physical mechanism follows the intended compression profile."
+        ]
+      }
+    ]
+  }
+}
