@@ -3,6 +3,8 @@
   "controller-cad.png": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/main/CAD/Images/FrontRightView.png",
   "motor-cad.png": "https://raw.githubusercontent.com/JoelBiswas/Axial-Flux-Motor/main/CAD/FullMotor.png",
   "ventilator-cad.png": "https://raw.githubusercontent.com/JoelBiswas/DIYVentilator/main/CAD/Images/Isometric.png",
+  "mouse-trap-base.svg": "https://github.com/JoelBiswas/MouseTrap/blob/main/STLs/Base.stl",
+  "mouse-trap-schematic.png": "https://github.com/JoelBiswas/MouseTrap/blob/main/Electronics/Schematic.pdf",
   "skill-logos": {
     "C++": "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg",
     "KiCad": "https://cdn.simpleicons.org/kicad/314CB0",

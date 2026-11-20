@@ -108,5 +108,12 @@
       "alt": "Controller CAD \u2014 top view",
       "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/TopView.png"
     }
+  ],
+  "mouse-trap": [
+    {
+      "file": "mouse-trap-schematic.png",
+      "alt": "KiCad wiring schematic for the ESP32, ultrasonic sensor, servo, and battery supply",
+      "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/Electronics/Schematic.pdf"
+    }
   ]
 }

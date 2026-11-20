@@ -241,5 +241,40 @@
         ]
       }
     ]
+  },
+  "mouse-trap": {
+    "title": "Electronic Mouse Trap",
+    "subtitle": "A 3D-printed live-capture trap that uses an ESP32 and ultrasonic sensing to release a servo-actuated door.",
+    "repository": "https://github.com/JoelBiswas/MouseTrap",
+    "sections": [
+      {
+        "heading": "What I Built",
+        "body": [
+          "For my Georgia Tech ECE Discovery Practicum (ECE 1100), I designed a battery-powered live-capture trap after mice were spotted in my dorm. The system detects when a mouse enters and closes the door so the mouse can be released later."
+        ]
+      },
+      {
+        "heading": "Mechanical Design",
+        "body": [
+          "I designed the base, roof, and door in Onshape for 3D printing. The enclosure positions the ultrasonic sensor to measure across the interior. When the ESP32 commands the MG996R servo, the door drops under gravity.",
+          "",
+          "The repository includes the assembly STEP file and the three printable STLs."
+        ]
+      },
+      {
+        "heading": "Electronics",
+        "body": [
+          "I drew the wiring schematic in KiCad for the breadboarded system. An LM2596 buck converter steps down the 9 V battery supply. A resistor divider scales the 5 V HC-SR04 echo signal for the ESP32 input."
+        ]
+      },
+      {
+        "heading": "Firmware & Testing",
+        "body": [
+          "The ESP32 samples the HC-SR04 about every 200 ms and converts the echo pulse width into distance. With the trap armed, a reading between 2 and 6 cm triggers the servo. The onboard LED indicates the closed state, and the BOOT button controls rearming.",
+          "",
+          "I wrote a separate distance-test sketch to inspect sensor readings independently of the door mechanism. The firmware currently triggers on one in-range reading. Requiring consecutive detections is a planned improvement to reject outliers."
+        ]
+      }
+    ]
   }
 }
