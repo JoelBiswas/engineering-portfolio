@@ -1,9 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {AnimatePresence, motion, useReducedMotion} from 'framer-motion';
 import galleries from './projectGalleries.json';
 import ProjectSectionTabs from './ProjectSectionTabs';
 import projectContent from './projectContent.json';
-import ReadmeContent from './ReadmeContent';
+import ReadmeContent, {readmeSections} from './ReadmeContent';
 import ProjectTag from './ProjectTag';
 import ProjectTechnology from './ProjectTechnology';
 export default function ProjectCard({id,name,tags,technologies,description,links,images}){
@@ -13,7 +13,25 @@ export default function ProjectCard({id,name,tags,technologies,description,links
  const reducedMotion=useReducedMotion();
  const [section,setSection]=useState(0);
  const project=projectContent[id];
- const sections=project.sections;
+ const readme=project.readme;
+ const [markdown,setMarkdown]=useState(readme?.fallback);
+ useEffect(()=>{
+  if(!readme)return;
+  const controller=new AbortController();
+  async function loadReadme(){
+   try {
+    const response=await fetch(readme.url,{signal:controller.signal});
+    if(!response.ok)return;
+    const source=await response.text();
+    if(!controller.signal.aborted && readmeSections(source,{filterSections:false}).length)setMarkdown(source);
+   } catch {
+    // The bundled README keeps the project readable if GitHub is unavailable.
+   }
+  }
+  loadReadme();
+  return ()=>controller.abort();
+ },[readme]);
+ const sections=readme?readmeSections(markdown,{filterSections:false}):project.sections;
  const selectedSection=Math.min(section,Math.max(0,sections.length-1));
  const media=images || [{file:id+'.svg',alt:name+' — placeholder image'}];
  const gallery=[...media,...(galleries[id] || [])];

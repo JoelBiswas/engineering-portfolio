@@ -72,3 +72,21 @@ test('heading arrows scroll the row and clipped headings automatically come into
  fireEvent.mouseMove(row,{clientX:390});
  expect(scrollBy).toHaveBeenLastCalledWith({left:140,behavior:'smooth'});
 });
+
+test('Mouse Trap preserves README headings and displays upstream changes',async()=>{
+ const originalFetch=global.fetch;
+ global.fetch=jest.fn().mockImplementation(async(url)=>{
+  expect(url).toBe('https://raw.githubusercontent.com/JoelBiswas/MouseTrap/HEAD/README.md');
+  return {ok:true,text:async()=> '### Electronic Mouse Trap\n## About this Project\nOriginal project description.\n## Repository Structure\nFiles listed in the README.'};
+ });
+ try {
+  render(<Projects/>);
+  fireEvent.click(screen.getByRole('button',{name:'Read about Electronic Mouse Trap'}));
+  const dialog=screen.getByRole('dialog');
+  expect(within(dialog).getByRole('tab',{name:'Bill of Materials'})).toBeInTheDocument();
+  fireEvent.click(await within(dialog).findByRole('tab',{name:'Repository Structure'}));
+  expect(within(dialog).getByRole('tabpanel')).toHaveTextContent('Files listed in the README.');
+ } finally {
+  global.fetch=originalFetch;
+ }
+});

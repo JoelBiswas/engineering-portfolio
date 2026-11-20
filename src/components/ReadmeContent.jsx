@@ -10,14 +10,15 @@ function Inline({text, repository}) {
   return part;
  });
 }
-export function readmeSections(markdown) {
+export function readmeSections(markdown,{filterSections=true}={}) {
  const sections=[];let current={heading:'',body:[]};let fenced=false;
- markdown.split('\n').forEach(line=>{
+ markdown.split(/\r?\n/).forEach(line=>{
   if(line.startsWith('```'))fenced=!fenced;
   if(!fenced && /^## /.test(line)){if(current.heading || current.body.join('').trim())sections.push(current);current={heading:line.slice(3),body:[]};}
   else current.body.push(line);
  });
  if(current.heading || current.body.join('').trim())sections.push(current);
+ if(!filterSections)return sections.filter(section=>section.heading);
  // Keep text sections only; project images belong in the gallery.
  const isPlaceholder=line=>/^(?:todo|tbd|coming soon|placeholder(?: text)?|to be (?:added|written)|work in progress)[.!…]*$/i.test(line.trim());
  return sections.map(section=>({...section,body:section.body.filter(line=>!isPlaceholder(line) && !/^\s*(?:!\[|<img\b)/i.test(line))}))

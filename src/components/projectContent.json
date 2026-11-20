@@ -246,35 +246,9 @@
     "title": "Electronic Mouse Trap",
     "subtitle": "A 3D-printed live-capture trap that uses an ESP32 and ultrasonic sensing to release a servo-actuated door.",
     "repository": "https://github.com/JoelBiswas/MouseTrap",
-    "sections": [
-      {
-        "heading": "What I Built",
-        "body": [
-          "For my Georgia Tech ECE Discovery Practicum (ECE 1100), I designed a battery-powered live-capture trap after mice were spotted in my dorm. The system detects when a mouse enters and closes the door so the mouse can be released later."
-        ]
-      },
-      {
-        "heading": "Mechanical Design",
-        "body": [
-          "I designed the base, roof, and door in Onshape for 3D printing. The enclosure positions the ultrasonic sensor to measure across the interior. When the ESP32 commands the MG996R servo, the door drops under gravity.",
-          "",
-          "The repository includes the assembly STEP file and the three printable STLs."
-        ]
-      },
-      {
-        "heading": "Electronics",
-        "body": [
-          "I drew the wiring schematic in KiCad for the breadboarded system. An LM2596 buck converter steps down the 9 V battery supply. A resistor divider scales the 5 V HC-SR04 echo signal for the ESP32 input."
-        ]
-      },
-      {
-        "heading": "Firmware & Testing",
-        "body": [
-          "The ESP32 samples the HC-SR04 about every 200 ms and converts the echo pulse width into distance. With the trap armed, a reading between 2 and 6 cm triggers the servo. The onboard LED indicates the closed state, and the BOOT button controls rearming.",
-          "",
-          "I wrote a separate distance-test sketch to inspect sensor readings independently of the door mechanism. The firmware currently triggers on one in-range reading. Requiring consecutive detections is a planned improvement to reject outliers."
-        ]
-      }
-    ]
+    "readme": {
+      "url": "https://raw.githubusercontent.com/JoelBiswas/MouseTrap/HEAD/README.md",
+      "fallback": "### Electronic Mouse Trap\nA 3D-printable mouse trap using an ultrasonic distance sesnsor and servo motor\n## About this Project\nThis repo contains all of the files for my final project for my ECE1100: ECE Discovery Practicum class at Georgia Tech. Towards the begining of this semester, people across my dorm began spotting mice around the lounge and hallway areas. That gave me the idea to build a trap that would automatically detect when a mouse enters and close the door so that the mouse can't escape. I could then come back later and remove the mouse from the trap, and release it safely. The build uses an HC-SR04 ultrasonic sensor inside the trap to measure the distance to the closest object. Under normal conditions, this distance is constant, as the sensor is simply looking at a wall. When a mouse enters, the sensor detects that an object is close by. This causes the ESP-32 to send a command to a servo motor, which causes the door to fall. The entire system is powered off of a 9V battery\n## Navigating this Repo\n- **CAD** - Contains a STEP file for the assembly and a link to the Onshape document\n- **Firmware** - Contains the firmware for the project\n- **Electronics** - Contains the KiCAD files for this project\n- **STLs** - Contains the three parts that need to be 3D printed\n## Bill of Materials\n|Part|Quantity|\n|----|--------|\n|MG996R Servo Motor|1|\n|Breadboard|1-2|\n|9V Battery|1|\n|9V Battery Connector|1|\n|ESP-32 Dev Board|1|\n|HC-SR04 Ultrasonic Sensor|1|\n|LM2596 Buck Convertor|1|\n|1 k\u03a9 Resistor|1|\n|2 k\u03a9 Resistor|1|\n## Assembly\n1. Print out the three files in the STLs folder of this repo\n2. Use hot glue to mount the HC-SR04 Ultrasonic Sensor inside of the trap base\n3. Assemble the electronics on the breadboard(s) accorrding to the schematic in Electronics/Schematic.pdf\n4. Place the 9V battery in the holder, and use the connector to connect it to the rest of the circuit\n5. Flash the ESP32 with the firmware found in the Firmware/Main folder of this repo\n## Design Process\nI used Onshape ([Link](https://cad.onshape.com/documents/e3882c1e08b8e152eea4bacc/w/22b5e1a3c5ab6f4c39ae26c9/e/5cbdab1673cd40ec0cd3e421?renderMode=0&uiState=6b00b90bbd30e9a9daed0efd)) to design the CAD model and KiCAD to plan out the electronics.\n"
+    }
   }
 }
