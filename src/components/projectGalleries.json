@@ -111,6 +111,26 @@
   ],
   "mouse-trap": [
     {
+      "file": "mouse-trap-2837.jpg",
+      "alt": "End view of the mouse trap enclosure and servo linkage",
+      "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/Media/IMG_2837.jpeg"
+    },
+    {
+      "file": "mouse-trap-2838.jpg",
+      "alt": "Overhead view of the mouse trap with the roof partly open",
+      "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/Media/IMG_2838.jpeg"
+    },
+    {
+      "file": "mouse-trap-2839.jpg",
+      "alt": "Mouse trap interior with the roof removed, showing the ultrasonic sensor",
+      "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/Media/IMG_2839.jpeg"
+    },
+    {
+      "file": "mouse-trap-base.svg",
+      "alt": "CAD view of the 3D-printable mouse trap base",
+      "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/STLs/Base.stl"
+    },
+    {
       "file": "mouse-trap-schematic.png",
       "alt": "KiCad wiring schematic for the ESP32, ultrasonic sensor, servo, and battery supply",
       "source": "https://github.com/JoelBiswas/MouseTrap/blob/main/Electronics/Schematic.pdf"
