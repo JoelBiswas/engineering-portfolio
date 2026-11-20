@@ -99,6 +99,11 @@
   ],
   "controller": [
     {
+      "file": "controller-cad.png",
+      "alt": "CAD render of the custom Star Wars RF controller",
+      "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/main/CAD/Images/FrontRightView.png"
+    },
+    {
       "file": "r2d2-gallery-4.png",
       "alt": "Controller CAD \u2014 internal layout",
       "source": "https://raw.githubusercontent.com/JoelBiswas/CustomRFController/HEAD/CAD/Images/OpenView.png"
